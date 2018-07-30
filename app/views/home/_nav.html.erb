@@ -1,0 +1,68 @@
+<%= params[:id]%>
+<nav>
+    <h1>여기는 네비게이션 section</h1>
+    <h1><%= link_to "new", new_home_path %></h1>
+</nav>  
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=euc-kr" />
+<script>
+function printTime() {
+              var clock = document.getElementById("clock");            // 출력할 장소 선택
+	
+	var old = new Date(0,0,0,17,00,00,00);								//지정해둔 시간
+	var old_h = old.getHours();
+	var old_m = old.getMinutes();
+	var old_s = old.getSeconds();
+	var old_sum = old_s + ( old_m * 60) + (old_h * 60 * 60 );   //지정해둔 시간을 초 단위로 변환.
+	
+
+    var now = new Date();                                                  // 현재시간
+    var now_h = now.getHours();
+	var now_m = now.getMinutes();
+	var now_s = now.getSeconds();
+	var now_sum = now_s + ( now_m * 60) + (now_h * 60 * 60 );   //지정해둔 시간을 초 단위로 변환.
+    
+	var test = 1;
+	
+	
+	if(old_sum - now_sum > 0 ){
+		var newtime = (old_sum - now_sum);
+		
+			var newtime_h =  parseInt(newtime / 3600);
+				newtime = newtime % 3600;
+			var newtime_m =  parseInt(newtime / 60);
+				newtime = newtime % 60;
+	 
+	}
+	else{
+		var newtime = parseInt( 86400 - (  (old_sum - now_sum) * -1 ));
+		
+			var newtime_h =  parseInt(newtime / 3600);
+				newtime = newtime % 3600;
+			var newtime_m =  parseInt(newtime / 60);
+				newtime = newtime % 60;
+	}
+		
+	
+     var nowTime =  newtime_h + "   시" +  newtime_m + "   분" + newtime  + "  초";
+              
+	clock.innerHTML = nowTime;           // 남은 약 복용 시간을 출력
+	clock_time.innerHTML = nowTime
+	
+
+		setTimeout("printTime()",1000);   //1초 마다 실행
+
+
+}window.onload = function() {                         // 페이지가 로딩되면 실행
+              printTime();
+}
+</script>
+<body>
+<!--약 복용까지 남은 시간 <span id="clock"></span> 입니다<br />-->
+
+
+<!--<br />내가 지정해둔 시간은 17시00분  PM 5:00입니다.</br> <span id="clock_time"></span> 가 0분 0초  되면 드세요<br />-->
+</body>
+</html>

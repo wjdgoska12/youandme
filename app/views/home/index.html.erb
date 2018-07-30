@@ -1,0 +1,88 @@
+<html>
+    
+    
+    <head>  
+    </head>
+<meta http-equiv="content-type" content="text/html; charset=euc-kr" />
+
+
+<body>
+        
+        <p1>여기가 진짜부분</p1></br>
+       
+        약 복용까지 남은 시간 <span id="clock"></span> 입니다<br/>
+        <h3>  지정해둔 시간  <%= @post.title %>시  <%= @post.content %>분 입니다 </h3> </br> 
+       <span id="clock_time"></span> 가 0분 0초  되면 드세요<br/>
+   
+        <p1>여기까지</p1>
+         
+        <div class="nav">
+            <div class="container"><%= render "home/nav" %></div>
+        </div>
+        
+        <div class="content">
+            <div class="container">
+                <%= render "home/content" %>
+            </div>
+        </div>
+        
+</body>
+    <script>
+    
+    var test1 = <%= @post.title %>;
+    var test2 = <%= @post.content %>;
+    
+    
+    function printTime() {
+        var clock = document.getElementById("clock"); // 출력할 장소 선택
+    	// 주석으로 안되는 부분 말해줘
+    	var hour = <%= @post.title %>;
+    	var minutes = <%= @post.content %>;
+    	
+    	var old = new Date(2018, 7 ,30, hour, minutes,00,00);		//여기에 값이 들어가야 남은시간이 계산이되는데 안들어갔어						//지정해둔 시간
+    	var old_h = old.getHours();
+    	var old_m = old.getMinutes();
+    	var old_s = old.getSeconds();
+    	var old_sum = old_s + ( old_m * 60) + (old_h * 60 * 60 );   //지정해둔 시간을 초 단위로 변환.
+    	
+        console.log(old, old_h, old_m, old_s, old_sum);
+        
+        var now = new Date();                                                  // 현재시간
+        var now_h = now.getHours();
+    	var now_m = now.getMinutes();
+    	var now_s = now.getSeconds();
+    	var now_sum = now_s + ( now_m * 60) + (now_h * 60 * 60 );   //지정해둔 시간을 초 단위로 변환.
+        
+    	var test = 1;
+    	
+    
+    	if(old_sum - now_sum > 0 ){
+    		var newtime = (old_sum - now_sum)
+    		var newtime_h = parseInt(newtime / 3600);
+    		newtime = newtime % 3600;
+    		var newtime_m =  parseInt(newtime / 60);
+    		newtime = newtime % 60;
+    	} else {
+    		var newtime = parseInt( 86400 - (  (old_sum - now_sum) * -1 ));
+    		var newtime_h =  parseInt(newtime / 3600);
+    		newtime = newtime % 3600;
+    		var newtime_m =  parseInt(newtime / 60);
+    		newtime = newtime % 60;
+    	}
+    	
+    
+        var nowTime =  newtime_h + "   시" +  newtime_m + "   분" + newtime  + "  초";
+        
+    	document.getElementById('clock').innerHTML = nowTime;           // 남은 약 복용 시간을 출력
+    	 clock_time.innerHTML = nowTime;
+    	// title_real.innerHTML = old_h;
+    	// content_real.innerHTML = old_m;
+    	
+    
+    	setTimeout("printTime()",1000);   //1초 마다 실행
+    }
+    
+    printTime();
+    
+    </script>    
+</html>

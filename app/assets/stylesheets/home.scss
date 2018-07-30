@@ -1,0 +1,21 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border: 1px solid black;
+    text-align: center;
+}
+
+h1{
+    text-transform: uppercase;
+}
+
+.post{
+    margin: 30px 30px;
+    padding: 10px 10px 10px 10px;
+}
