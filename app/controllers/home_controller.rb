@@ -1,4 +1,8 @@
+
+
 class HomeController < ApplicationController
+    
+   require 'open_weather'
      
     def new
     end
@@ -13,7 +17,11 @@ class HomeController < ApplicationController
     
     #Read
     def index
-        @post = Post.all
+        @post = Post.find(5)
+        
+        options = { units: "metric", APPID: "6bd9557d7c997d637113c460ed0854ea" }
+      @weather_seoul =  OpenWeather::Current.geocode(38.123206,128.2030600, options)
+        #   @weather_seoul =OpenWeather::Current.city("Inje, KR", options)
     end
     
     def show
